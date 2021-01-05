@@ -9,8 +9,9 @@ import (
 	"io"
 	"os"
 
-	"github.com/pkg/term/termios"
 	"golang.org/x/sys/unix"
+
+	"github.com/kckrinke/go-term/termios"
 )
 
 const (
@@ -78,4 +79,10 @@ func (t *Term) Available() (int, error) {
 // Buffered returns the number of bytes that have been written into the current buffer.
 func (t *Term) Buffered() (int, error) {
 	return termios.Tiocoutq(uintptr(t.fd))
+}
+
+// Return the Window Size
+func (t *Term) Winsz() (w, h int, err error) {
+	w, h, err = termios.Tiocgwinsz(uintptr(t.fd))
+	return
 }

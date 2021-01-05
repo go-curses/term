@@ -31,6 +31,17 @@ func Tiocoutq(fd uintptr) (int, error) {
 	return unix.IoctlGetInt(int(fd), unix.TIOCOUTQ)
 }
 
+// Tiocgwinsz return the width and height of the screen
+func Tiocgwinsz(fd uintptr) (w, h int, err error) {
+	wsz, err := unix.IoctlGetWinsize(int(fd), unix.TIOCGWINSZ)
+	if err != nil {
+		return -1, -1, err
+	}
+	w = int(wsz.Col)
+	h = int(wsz.Row)
+	return
+}
+
 // Cfmakecbreak modifies attr for cbreak mode.
 func Cfmakecbreak(attr *unix.Termios) {
 	attr.Lflag &^= unix.ECHO | unix.ICANON

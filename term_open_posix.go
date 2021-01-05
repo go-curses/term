@@ -4,9 +4,10 @@ package term
 
 import (
 	"os"
-
-	"github.com/pkg/term/termios"
+\
 	"golang.org/x/sys/unix"
+
+	"github.com/kckrinke/go-term/termios"
 )
 
 // Open opens an asynchronous communications port.

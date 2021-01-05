@@ -5,8 +5,9 @@ import (
 	"syscall"
 	"unsafe"
 
-	"github.com/pkg/term/termios"
 	"golang.org/x/sys/unix"
+
+	"github.com/kckrinke/go-term/termios"
 )
 
 type attr unix.Termios

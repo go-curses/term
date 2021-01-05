@@ -4,7 +4,7 @@ package term
 
 import (
 	"os"
-\
+
 	"golang.org/x/sys/unix"
 
 	"github.com/kckrinke/go-term/termios"

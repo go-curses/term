@@ -11,7 +11,7 @@ import (
 
 	"golang.org/x/sys/unix"
 
-	"github.com/kckrinke/go-term/termios"
+	"github.com/go-curses/term/termios"
 )
 
 const (

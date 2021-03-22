@@ -1,4 +1,4 @@
-module github.com/kckrinke/go-term
+module github.com/go-curses/term
 
 go 1.14
 

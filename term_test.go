@@ -7,7 +7,7 @@ import (
 
 	"time"
 
-	"github.com/kckrinke/go-term/termios"
+	"github.com/go-curses/term/termios"
 	"golang.org/x/sys/unix"
 )
 

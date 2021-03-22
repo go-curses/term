@@ -1,6 +1,6 @@
 
 # term
-    import "github.com/kckrinke/go-term"
+    import "github.com/go-curses/term"
 
 This package is a clone of "github.com/pkg/term" with only a few changes
 in order to support [CDK](https://github.com/kckrinke/go-cdk).

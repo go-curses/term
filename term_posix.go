@@ -7,7 +7,7 @@ import (
 
 	"golang.org/x/sys/unix"
 
-	"github.com/kckrinke/go-term/termios"
+	"github.com/go-curses/term/termios"
 )
 
 // Term represents an asynchronous communications port.

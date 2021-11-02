@@ -5,8 +5,9 @@ package term
 import (
 	"time"
 
-	"github.com/pkg/term/termios"
 	"golang.org/x/sys/unix"
+
+	"github.com/go-curses/term/termios"
 )
 
 // Term represents an asynchronous communications port.

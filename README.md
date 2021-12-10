@@ -1,6 +1,10 @@
 
 # term
-    import "github.com/pkg/term"
+    import "github.com/go-curses/term"
+
+This package is a clone of "github.com/pkg/term" with only a few changes
+in order to support [CDK](https://github.com/kckrinke/go-cdk).
+
 
 Package term manages POSIX terminals. As POSIX terminals are connected to,
 or emulate, a UART, this package also provides control over the various
@@ -191,6 +195,11 @@ len(b).
 
 
 
+### func (\*Term) Winsz
+``` go
+func (t *Term) Winsz() (w, h int, err error)
+```
+Get the width and height of the terminal.
 
 
 

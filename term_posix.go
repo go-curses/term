@@ -2,11 +2,16 @@
 
 package term
 
+import "C"
 import (
+	"fmt"
+	"syscall"
 	"time"
+	"unsafe"
 
-	"github.com/pkg/term/termios"
 	"golang.org/x/sys/unix"
+
+	"github.com/go-curses/term/termios"
 )
 
 // Term represents an asynchronous communications port.
@@ -250,6 +255,38 @@ func (t *Term) CTS() (bool, error) {
 func (t *Term) RI() (bool, error) {
 	status, err := termios.Tiocmget(uintptr(t.fd))
 	return status&unix.TIOCM_RI == unix.TIOCM_RI, err
+}
+
+// Tiocsti simulates terminal input
+func Tiocsti(fd uintptr, input string) (err error) {
+	inputs := C.CString(input)
+	addr := uintptr(unsafe.Pointer(inputs))
+	for i := range []byte(input) {
+		_, _, err := syscall.Syscall(syscall.SYS_IOCTL, fd, syscall.TIOCSTI, addr+uintptr(i))
+		if uintptr(err) != 0 {
+			return fmt.Errorf("syscall error: %s\n", err.Error())
+		}
+	}
+	// err = termios.Tcflush(fd, termios.TCIOFLUSH)
+	return
+}
+
+// Tiocsti simulates terminal input
+func (t *Term) Tiocsti(input string) (err error) {
+	if err = Tiocsti(uintptr(t.fd), input); err != nil {
+		return
+	}
+	return
+}
+
+// Name returns the name argument used in the term.Open call
+func (t *Term) Name() string {
+	return t.name
+}
+
+// Fd returns the file descriptor
+func (t *Term) Fd() uintptr {
+	return uintptr(t.fd)
 }
 
 // Close closes the device and releases any associated resources.

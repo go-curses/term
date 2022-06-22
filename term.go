@@ -1,3 +1,4 @@
+//go:build !windows
 // +build !windows
 
 // Package term manages POSIX terminals. As POSIX terminals are connected to,

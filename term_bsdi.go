@@ -1,3 +1,4 @@
+//go:build netbsd || openbsd
 // +build netbsd openbsd
 
 package term

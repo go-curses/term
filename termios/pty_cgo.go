@@ -1,3 +1,4 @@
+//go:build dragonfly || openbsd || solaris
 // +build dragonfly openbsd solaris
 
 package termios

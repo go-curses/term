@@ -2,7 +2,6 @@
 
 package term
 
-import "C"
 import (
 	"fmt"
 	"syscall"
@@ -259,10 +258,8 @@ func (t *Term) RI() (bool, error) {
 
 // Tiocsti simulates terminal input
 func Tiocsti(fd uintptr, input string) (err error) {
-	inputs := C.CString(input)
-	addr := uintptr(unsafe.Pointer(inputs))
-	for i := range []byte(input) {
-		_, _, err := syscall.Syscall(syscall.SYS_IOCTL, fd, syscall.TIOCSTI, addr+uintptr(i))
+	for i := range input {
+		_, _, err := syscall.Syscall(syscall.SYS_IOCTL, fd, syscall.TIOCSTI, uintptr(unsafe.Pointer(&i)))
 		if uintptr(err) != 0 {
 			return fmt.Errorf("syscall error: %s\n", err.Error())
 		}
